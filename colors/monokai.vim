@@ -1,5 +1,5 @@
 " Nikita Kouevda
-" 2014/10/20
+" 2015/01/11
 
 set background=dark
 
@@ -11,22 +11,49 @@ endif
 
 let g:colors_name = 'monokai'
 
+let s:colors = {}
+let s:colors.0   = ['235', '#272822']
+let s:colors.1   = ['197', '#f92672']
+let s:colors.2   = ['118', '#a6e22e']
+let s:colors.3   = ['185', '#e6db74']
+let s:colors.4   = ['135', '#ae81ff']
+let s:colors.5   = ['208', '#fd971f']
+let s:colors.6   = [ '81', '#66d9ef']
+let s:colors.7   = ['255', '#f8f8f2']
+let s:colors.8   = ['238', '#5d5e59']
+let s:colors.237 = ['237', '#3e3d32']
+let s:colors.238 = ['238', '#49483e']
+let s:colors.243 = ['243', '#75715e']
+
+function! s:highlight(group, fg, bg, ...)
+  let l:attrs = a:0 ? a:1 : 'NONE'
+  exe 'hi ' . a:group . ' cterm=' . l:attrs . ' gui=' . l:attrs
+  if a:fg != ''
+    exe 'hi ' . a:group . ' ctermfg=' . s:colors[a:fg][0]
+    exe 'hi ' . a:group . ' guifg=' . s:colors[a:fg][1]
+  endif
+  if a:bg != ''
+    exe 'hi ' . a:group . ' ctermbg=' . s:colors[a:bg][0]
+    exe 'hi ' . a:group . ' guibg=' . s:colors[a:bg][1]
+  endif
+endfunction
+
 " General
-hi Normal         ctermfg=255   ctermbg=235   cterm=NONE        guifg=#f8f8f2   guibg=#272822   gui=NONE
-hi Visual                       ctermbg=238   cterm=NONE                        guibg=#49483e   gui=NONE
+call s:highlight('Normal', '7', '0')
+call s:highlight('Visual', '', '8')
 hi! link VisualNOS Visual
-hi Search         ctermfg=bg    ctermbg=222   cterm=NONE        guifg=bg        guibg=#ffe792   gui=NONE
-hi IncSearch      ctermfg=bg    ctermbg=208   cterm=NONE        guifg=bg        guibg=#fd971f   gui=NONE
-hi Folded         ctermfg=243   ctermbg=238   cterm=NONE        guifg=#75715e   guibg=#49483e   gui=NONE
+call s:highlight('Search', '0', '3')
+call s:highlight('IncSearch', '0', '5')
+call s:highlight('Folded', '243', '238')
 hi! link FoldColumn Folded
-hi Cursor         ctermfg=bg    ctermbg=fg    cterm=NONE        guifg=bg        guibg=fg        gui=NONE
-hi CursorLine                   ctermbg=237   cterm=NONE                        guibg=#3e3d32   gui=NONE
+call s:highlight('Cursor', '0', '7')
+call s:highlight('CursorLine', '', '237')
 hi! link CursorColumn CursorLine
 
 " Splits, status lines, and tab line
-hi VertSplit      ctermfg=237   ctermbg=237   cterm=NONE        guifg=#3e3d32   guibg=#3e3d32   gui=NONE
-hi StatusLine     ctermfg=fg    ctermbg=237   cterm=NONE        guifg=fg        guibg=#3e3d32   gui=NONE
-hi StatusLineNC   ctermfg=243   ctermbg=237   cterm=NONE        guifg=#75715e   guibg=#3e3d32   gui=NONE
+call s:highlight('VertSplit', '237', '237')
+call s:highlight('StatusLine', '7', '237')
+call s:highlight('StatusLineNC', '243', '237')
 hi! link TabLine StatusLineNC
 hi! link TabNum TabLine
 hi! link TabWinNum TabLine
@@ -37,33 +64,33 @@ hi! link TabLineFill VertSplit
 
 " Popup menu and command line completion menu
 hi! link Pmenu StatusLine
-hi PmenuSbar                    ctermbg=238   cterm=NONE                        guibg=#49483e   gui=NONE
-hi PmenuThumb                   ctermbg=243   cterm=NONE                        guibg=#75715e   gui=NONE
-hi PmenuSel       ctermfg=bg    ctermbg=185   cterm=NONE        guifg=bg        guibg=#e6db74   gui=NONE
+call s:highlight('PmenuSbar', '', '238')
+call s:highlight('PmenuThumb', '', '243')
+call s:highlight('PmenuSel', '0', '6')
 hi! link WildMenu PmenuSel
 
 " Syntax
-hi Comment        ctermfg=243                 cterm=NONE        guifg=#75715e                   gui=NONE
-hi Constant       ctermfg=135                 cterm=NONE        guifg=#ae81ff                   gui=NONE
-hi String         ctermfg=185                 cterm=NONE        guifg=#e6db74                   gui=NONE
+call s:highlight('Comment', '243', '')
+call s:highlight('Constant', '4', '')
+call s:highlight('String', '3', '')
 hi! link Character String
-hi Identifier     ctermfg=208                 cterm=NONE        guifg=#fd971f                   gui=NONE
-hi Function       ctermfg=118                 cterm=NONE        guifg=#a6e22e                   gui=NONE
-hi Statement      ctermfg=197                 cterm=NONE        guifg=#f92672                   gui=NONE
+call s:highlight('Identifier', '5', '')
+call s:highlight('Function', '2', '')
+call s:highlight('Statement', '1', '')
 hi! link PreProc Statement
-hi Type           ctermfg=81                  cterm=NONE        guifg=#66d9ef                   gui=NONE
+call s:highlight('Type', '6', '')
 hi! link StorageClass Statement
 hi! link Special String
 hi! link SpecialChar Constant
 hi! link Delimiter Constant
-hi Underlined     ctermfg=81                  cterm=underline   guifg=#66d9ef                   gui=underline
+call s:highlight('Underlined', '6', '', 'underline')
 hi! link Ignore Comment
-hi Error          ctermfg=bg    ctermbg=197   cterm=NONE        guifg=bg        guibg=#f92672   gui=NONE
+call s:highlight('Error', '0', '1')
 hi! link Todo IncSearch
 
 " Spelling
 hi! link SpellBad Error
-hi SpellCap       ctermfg=bg    ctermbg=135   cterm=NONE        guifg=bg        guibg=#ae81ff   gui=NONE
+call s:highlight('SpellCap', '0', '4')
 hi! link SpellLocal SpellCap
 hi! link SpellRare SpellCap
 
@@ -75,10 +102,10 @@ hi! link Question MoreMsg
 hi! link ErrorMsg Statement
 
 " Diff
-hi DiffAdd        ctermfg=bg    ctermbg=118   cterm=NONE        guifg=bg        guibg=#a6e22e   gui=NONE
-hi! link DiffDelete Error
+hi! link DiffAdd Search
+call s:highlight('DiffDelete', '0', '0')
 hi! link DiffChange Visual
-hi! link DiffText PmenuSel
+hi! link DiffText DiffAdd
 
 " Miscellaneous
 hi! link Title ModeMsg
@@ -91,3 +118,7 @@ hi! link SpecialKey NonText
 hi! link LineNr NonText
 hi! link CursorLineNr Normal
 hi! link SignColumn LineNr
+
+" Clean up
+unlet s:colors
+delfunction s:highlight

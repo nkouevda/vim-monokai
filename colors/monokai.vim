@@ -1,5 +1,5 @@
 " Nikita Kouevda
-" 2015/01/11
+" 2015/01/16
 
 set background=dark
 
@@ -11,34 +11,38 @@ endif
 
 let g:colors_name = 'monokai'
 
-if !exists('g:monokai_256_colors')
-  let g:monokai_256_colors = 1
+if !exists('g:monokai_256_cterm')
+  let g:monokai_256_cterm = 1
+endif
+
+if !exists('g:monokai_256_gui')
+  let g:monokai_256_gui = 0
 endif
 
 let s:colors = {}
-let s:colors.0   = [  '0', '235', '#272822']
-let s:colors.1   = [  '1', '197', '#f92672']
-let s:colors.2   = [  '2', '118', '#a6e22e']
-let s:colors.3   = [  '3', '185', '#e6db74']
-let s:colors.4   = [  '4', '135', '#ae81ff']
-let s:colors.5   = [  '5', '208', '#fd971f']
-let s:colors.6   = [  '6',  '81', '#66d9ef']
-let s:colors.7   = [  '7', '255', '#f8f8f2']
-let s:colors.8   = [  '8', '238', '#5d5e59']
-let s:colors.237 = ['237', '237', '#3e3d32']
-let s:colors.238 = ['238', '238', '#49483e']
-let s:colors.243 = ['243', '243', '#75715e']
+let s:colors.0   = [  '0', '235', '#272822', '#262626']
+let s:colors.1   = [  '1', '197', '#f92672', '#ff005f']
+let s:colors.2   = [  '2', '118', '#a6e22e', '#87ff00']
+let s:colors.3   = [  '3', '185', '#e6db74', '#d7d75f']
+let s:colors.4   = [  '4', '135', '#ae81ff', '#af5fff']
+let s:colors.5   = [  '5', '208', '#fd971f', '#ff8700']
+let s:colors.6   = [  '6',  '81', '#66d9ef', '#5fd7ff']
+let s:colors.7   = [  '7', '255', '#f8f8f2', '#eeeeee']
+let s:colors.8   = [  '8', '238', '#5d5e59', '#444444']
+let s:colors.237 = ['237', '237', '#3e3d32', '#3a3a3a']
+let s:colors.238 = ['238', '238', '#49483e', '#444444']
+let s:colors.243 = ['243', '243', '#75715e', '#767676']
 
 function! s:highlight(group, fg, bg, ...)
   let l:attrs = a:0 ? a:1 : 'NONE'
   exe 'hi ' . a:group . ' cterm=' . l:attrs . ' gui=' . l:attrs
   if a:fg != ''
-    exe 'hi ' . a:group . ' ctermfg=' . s:colors[a:fg][g:monokai_256_colors]
-    exe 'hi ' . a:group . ' guifg=' . s:colors[a:fg][2]
+    exe 'hi ' . a:group . ' ctermfg=' . s:colors[a:fg][g:monokai_256_cterm]
+    exe 'hi ' . a:group . ' guifg=' . s:colors[a:fg][2 + g:monokai_256_gui]
   endif
   if a:bg != ''
-    exe 'hi ' . a:group . ' ctermbg=' . s:colors[a:bg][g:monokai_256_colors]
-    exe 'hi ' . a:group . ' guibg=' . s:colors[a:bg][2]
+    exe 'hi ' . a:group . ' ctermbg=' . s:colors[a:bg][g:monokai_256_cterm]
+    exe 'hi ' . a:group . ' guibg=' . s:colors[a:bg][2 + g:monokai_256_gui]
   endif
 endfunction
 

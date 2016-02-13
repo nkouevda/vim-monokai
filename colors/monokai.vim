@@ -114,7 +114,7 @@ hi! link DiffText DiffAdd
 
 " Miscellaneous
 hi! link Title ModeMsg
-hi! link MatchParen IncSearch
+call s:highlight('MatchParen', '0', '243')
 hi! link ColorColumn Error
 hi! link Directory Statement
 hi! link NonText Comment

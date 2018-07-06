@@ -59,6 +59,8 @@ hi! link CursorColumn CursorLine
 call s:highlight('VertSplit', '237', '237')
 call s:highlight('StatusLine', '7', '237')
 call s:highlight('StatusLineNC', '243', '237')
+hi! link StatusLineTerm StatusLine
+hi! link StatusLineTermNC StatusLineNC
 hi! link TabLine StatusLineNC
 hi! link TabNum TabLine
 hi! link TabWinNum TabLine
@@ -100,8 +102,9 @@ hi! link SpellLocal SpellCap
 hi! link SpellRare SpellCap
 
 " Messages
-hi! link ModeMsg Function
-hi! link MoreMsg Identifier
+hi! link ModeMsg Normal
+hi! link Title Identifier
+hi! link MoreMsg Title
 hi! link WarningMsg MoreMsg
 hi! link Question MoreMsg
 hi! link ErrorMsg Statement
@@ -113,7 +116,6 @@ hi! link DiffChange Visual
 hi! link DiffText DiffAdd
 
 " Miscellaneous
-hi! link Title ModeMsg
 call s:highlight('MatchParen', '0', '243')
 hi! link ColorColumn Error
 hi! link Directory Statement

@@ -30,6 +30,11 @@ let s:colors.237 = ['237', '237', '#3e3d32', '#3a3a3a']
 let s:colors.238 = ['238', '238', '#49483e', '#444444']
 let s:colors.243 = ['243', '243', '#75715e', '#767676']
 
+" See `:help g:terminal_ansi_colors`
+let s:ansi = filter(copy(s:colors), { k -> k < 8 })
+let s:ansi_hex = map(copy(s:ansi), { k, v -> v[2 + g:monokai_256_gui] })
+let g:terminal_ansi_colors = repeat(values(s:ansi_hex), 2)
+
 function! s:highlight(group, fg, bg, ...)
   let l:attrs = a:0 ? a:1 : 'NONE'
   exe 'hi ' . a:group . ' cterm=' . l:attrs . ' gui=' . l:attrs
@@ -127,5 +132,5 @@ hi! link CursorLineNr Normal
 hi! link SignColumn LineNr
 
 " Clean up
-unlet s:colors
+unlet s:colors s:ansi s:ansi_hex
 delfunction s:highlight

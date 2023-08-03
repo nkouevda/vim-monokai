@@ -37,14 +37,14 @@ let g:terminal_ansi_colors = repeat(values(s:ansi_hex), 2)
 
 function! s:highlight(group, fg, bg, ...)
   let l:attrs = a:0 ? a:1 : 'NONE'
-  exe 'hi ' . a:group . ' cterm=' . l:attrs . ' gui=' . l:attrs
+  exe 'hi ' .. a:group .. ' cterm=' .. l:attrs .. ' gui=' .. l:attrs
   if a:fg != ''
-    exe 'hi ' . a:group . ' ctermfg=' . s:colors[a:fg][g:monokai_256_cterm]
-    exe 'hi ' . a:group . ' guifg=' . s:colors[a:fg][2 + g:monokai_256_gui]
+    exe 'hi ' .. a:group .. ' ctermfg=' .. s:colors[a:fg][g:monokai_256_cterm]
+    exe 'hi ' .. a:group .. ' guifg=' .. s:colors[a:fg][2 + g:monokai_256_gui]
   endif
   if a:bg != ''
-    exe 'hi ' . a:group . ' ctermbg=' . s:colors[a:bg][g:monokai_256_cterm]
-    exe 'hi ' . a:group . ' guibg=' . s:colors[a:bg][2 + g:monokai_256_gui]
+    exe 'hi ' .. a:group .. ' ctermbg=' .. s:colors[a:bg][g:monokai_256_cterm]
+    exe 'hi ' .. a:group .. ' guibg=' .. s:colors[a:bg][2 + g:monokai_256_gui]
   endif
 endfunction
 

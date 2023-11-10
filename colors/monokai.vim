@@ -56,8 +56,12 @@ call s:highlight('Search', '0', '3')
 call s:highlight('IncSearch', '0', '5')
 call s:highlight('Folded', '243', '238')
 hi! link FoldColumn Folded
+call s:highlight('NonText', '243', '')
+hi! link LineNr NonText
+hi! link SignColumn NonText
 call s:highlight('Cursor', '0', '7')
 call s:highlight('CursorLine', '', '237')
+hi! link CursorLineNr CursorLine
 hi! link CursorColumn CursorLine
 
 " Splits, status lines, and tab line
@@ -82,7 +86,7 @@ call s:highlight('PmenuSel', '0', '6')
 hi! link WildMenu PmenuSel
 
 " Syntax
-call s:highlight('Comment', '243', '')
+hi! link Comment NonText
 call s:highlight('Constant', '4', '')
 call s:highlight('String', '3', '')
 hi! link Character String
@@ -121,15 +125,12 @@ hi! link DiffChange Visual
 hi! link DiffText DiffAdd
 
 " Miscellaneous
-call s:highlight('MatchParen', '0', '243')
 hi! link ColorColumn Error
-hi! link Directory Statement
-hi! link NonText Comment
 hi! link Conceal NonText
+hi! link Directory Constant
+call s:highlight('MatchParen', '0', '243')
+hi! link QuickFixLine Visual
 hi! link SpecialKey NonText
-hi! link LineNr NonText
-hi! link CursorLineNr Normal
-hi! link SignColumn LineNr
 
 " Clean up
 unlet s:colors s:ansi s:ansi_hex

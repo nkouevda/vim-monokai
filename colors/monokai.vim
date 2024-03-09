@@ -37,15 +37,15 @@ let g:terminal_ansi_colors = repeat(values(s:ansi_hex), 2)
 
 function! s:highlight(group, fg_key, bg_key, ...)
   let l:attrs = a:0 ? a:1 : 'NONE'
-  exe 'hi ' .. a:group .. ' cterm=' .. l:attrs .. ' gui=' .. l:attrs
+  exe 'hi ' . a:group . ' cterm=' . l:attrs . ' gui=' . l:attrs
 
   let l:fgs = get(s:colors, a:fg_key, ['NONE', 'NONE', 'NONE', 'NONE'])
-  exe 'hi ' .. a:group .. ' ctermfg=' .. l:fgs[g:monokai_256_cterm]
-  exe 'hi ' .. a:group .. ' guifg=' .. l:fgs[2 + g:monokai_256_gui]
+  exe 'hi ' . a:group . ' ctermfg=' . l:fgs[g:monokai_256_cterm]
+  exe 'hi ' . a:group . ' guifg=' . l:fgs[2 + g:monokai_256_gui]
 
   let l:bgs = get(s:colors, a:bg_key, ['NONE', 'NONE', 'NONE', 'NONE'])
-  exe 'hi ' .. a:group .. ' ctermbg=' .. l:bgs[g:monokai_256_cterm]
-  exe 'hi ' .. a:group .. ' guibg=' .. l:bgs[2 + g:monokai_256_gui]
+  exe 'hi ' . a:group . ' ctermbg=' . l:bgs[g:monokai_256_cterm]
+  exe 'hi ' . a:group . ' guibg=' . l:bgs[2 + g:monokai_256_gui]
 endfunction
 
 " General
